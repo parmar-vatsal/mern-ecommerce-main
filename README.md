@@ -27,4 +27,3 @@ URL: http://localhost:5003/
 cmd /c "cd web_panel && npm start"
 ```
 URL: http://localhost:5001/
-
