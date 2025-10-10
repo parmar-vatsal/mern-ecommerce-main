@@ -12,19 +12,19 @@ Open three terminals and run the following commands:
 
 ### Backend API
 ```bash
-cd web_services && npm start
+cmd /c "cd web_services && npm start"
 ```
 URL: http://localhost:5002/
 
 ### Admin Panel
 ```bash
-cd web_admin && npm start
+cmd /c "cd web_admin && npm start"
 ```
 URL: http://localhost:5003/
 
 ### User Panel
 ```bash
-cd web_panel && npm start
+cmd /c "cd web_panel && npm start"
 ```
 URL: http://localhost:5001/
 
