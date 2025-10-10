@@ -2,9 +2,9 @@
 
 ## Install Dependencies
 ```bash
-cd web_services && npm install
-cd ../web_admin && npm install
-cd ../web_panel && npm install
+cmd /c "cd web_panel && npm install"
+cmd /c "cd ../web_admin && npm install"
+cmd /c "cd ../web_panel && npm install"
 ```
 
 ## Start the Services
