@@ -8,13 +8,21 @@ const { ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAIL} = OrderCo
 const { CLEAR_CART_ITEM } = ActionTypes;
 
 export const createOrder = (reqData) => async (dispatch, getState) => {
-    
+
     try {
       dispatch({ type: ORDER_CREATE_REQUEST });
 
+      const userInfo = JSON.parse(localStorage.getItem("userPanelInfo"));
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo?.token}`,
+        },
+      };
+
       const response = await axios.post(
         `orders/`,
-        reqData
+        reqData,
+        config
       );
 
       const responseData = response.data;
@@ -49,13 +57,21 @@ export const createOrder = (reqData) => async (dispatch, getState) => {
   };  
 
 export const processPayment = (reqData) => async (dispatch, getState) => {
-    
+
     try {
       dispatch({ type: ORDER_CREATE_REQUEST });
 
+      const userInfo = JSON.parse(localStorage.getItem("userPanelInfo"));
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo?.token}`,
+        },
+      };
+
       const response = await axios.post(
         "checkout/payment/",
-        reqData
+        reqData,
+        config
       );
 
       const responseData = response.data;

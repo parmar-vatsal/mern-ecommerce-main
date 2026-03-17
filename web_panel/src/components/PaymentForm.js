@@ -21,7 +21,14 @@ const PaymentForm = () => {
   const [btnDisable, setBtnDisable] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');  
   const [showCardPayment, setShowCardPayment] = useState(false); 
-  const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);  
+  const userInfo = useSelector((state) => state.userPanelLogin.userInfo.data);
+
+  // Check if user is authenticated
+  if (!userInfo) {
+    history.push("/login");
+    return null;
+  }
+
   const user = userInfo[0]._id;
 
   const stripe = useStripe();
