@@ -21,7 +21,7 @@ const verifyToken = (req,res,next) =>{
 
 const verifyTokenAndAuthorization = (req,res,next) =>{
 	verifyToken(req,res,()=>{
-		if(req.user_id === req.param.id || req.user.isAdmin){
+		if(req.user.id === req.params.id || req.user.isAdmin){
 			next();
 		}else{
 			res.status(403).json({status:0,message:"You have not access"})

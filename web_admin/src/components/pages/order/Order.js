@@ -7,7 +7,10 @@ import { deleteOrder } from "../../../redux/actions/OrderActions";
 
 
 const Order = (props) => {
-	let {_id, title,image,totalPrice,isPaid, orderItems,createdAt,isDelivered, shippingAddress:{customer_name}, user_info:[{email}]} = props.order;
+	let { _id, title, image, totalPrice, isPaid, orderItems, createdAt, isDelivered, shippingAddress, user_info } = props.order;
+	
+	const customer_name = shippingAddress?.customer_name || 'N/A';
+	const email = user_info && user_info.length > 0 ? user_info[0].email : 'N/A';
 
 	const orderDate = new Date(createdAt);
 	const localOrderDate = orderDate.toLocaleString('en-US');

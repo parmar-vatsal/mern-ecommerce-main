@@ -6,16 +6,21 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import axios from "axios";
 
-const {userLogin: { userInfo }} = store.getState();
 axios.defaults.baseURL = process.env.REACT_APP_API_BASEURL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-if(typeof userInfo !== 'undefined' && userInfo !== null){
-	const token = userInfo.token;
-	if(typeof token != undefined && token){
-		axios.defaults.headers.common['Authorization'] = `Bearer ${userInfo.token}`;//send token
-	}
-}
+axios.interceptors.request.use(
+  (config) => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (userInfo && userInfo.token) {
+      config.headers.Authorization = `Bearer ${userInfo.token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 ReactDOM.render(
   <Provider store={store}>

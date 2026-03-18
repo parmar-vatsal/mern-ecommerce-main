@@ -49,35 +49,30 @@ router.get("/", async (req,res)=>{
   		
   		let sortObject = {};
   		let filterObj = {};
-  		let searchTextObj = {};
-  		let priceObject = {};
+  		
   		sortByField = sortByVal;
   		if(sortByVal == 'name'){
   			sortByField = 'title'; 
   		}
 
+  		let andConditions = [];
+
   		if(searchText !== ''){
-  				searchTextObj = {
-							       $or : [
-							          { title: { $regex: searchText, $options:'i' } },
-	  								  { description: { $regex: searchText, $options:'i' } }
-							       ]
-							    };
-
+  			andConditions.push({
+  				$or : [
+  					{ title: { $regex: searchText, $options:'i' } },
+  					{ description: { $regex: searchText, $options:'i' } }
+  				]
+  			});
   		}
 
-  		if(priceFilter !== ''){
-  			priceObject = 	{price: {$lte: priceFilter}};
+  		if(priceFilter !== '' && priceFilter !== 'undefined'){
+  			andConditions.push({price: {$lte: priceFilter}});
   		}
 
-
-	    filterObj = {
-					 $and : [							    
-					    searchTextObj,
-					    priceObject
-					 ]
-				   };
-
+  		if (andConditions.length > 0) {
+  			filterObj = { $and: andConditions };
+  		}
 
   		sortObject[sortByField] = 1;  		
   		

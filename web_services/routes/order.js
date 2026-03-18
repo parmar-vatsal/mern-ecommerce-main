@@ -5,7 +5,7 @@ const User = require("../models/User");
 const {verifyToken,verifyTokenAndAuthorization,verifyTokenAndAdmin} = require("./verifyToken");
 
 //Create Order
-router.post("/",verifyTokenAndAuthorization, async (req,res)=>{
+router.post("/",verifyToken, async (req,res)=>{
 	const newOrder = new Order(req.body);
 
 	try{
